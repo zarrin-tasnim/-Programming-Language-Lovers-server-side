@@ -5,21 +5,21 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 
-const categories = require('./data/courses.json');
-const news = require('./data/course.json');
+const courses = require('./data/courses.json');
+const course = require('./data/course.json');
 
 app.get('/', (req, res) => {
-    res.send('News API Running');
+    res.send('Course API Running');
 });
 
-app.get('/news-categories', (req, res) => {
-    res.send(categories)
+app.get('/course-categories', (req, res) => {
+    res.send(courses)
 });
 
-app.get('/category/:id', (req, res) => {
+app.get('/course/:id', (req, res) => {
     const id = req.params.id;
     if (id === '08') {
-        res.send(news);
+        res.send(course);
     }
     else {
         const category_news = news.filter(n => n.category_id === id);
@@ -27,14 +27,14 @@ app.get('/category/:id', (req, res) => {
     }
 })
 
-app.get('/news', (req, res) => {
-    res.send(news);
+app.get('/course', (req, res) => {
+    res.send(course);
 });
 
-app.get('/news/:id', (req, res) => {
+app.get('/course/:id', (req, res) => {
     const id = req.params.id;
-    const selectedNews = news.find(n => n._id === id);
-    res.send(selectedNews);
+    const selectedCourse = course.find(n => n._id === id);
+    res.send(selectedCourse);
 });
 
 app.listen(port, () => {
